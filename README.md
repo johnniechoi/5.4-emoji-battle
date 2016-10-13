@@ -1,1 +1,4 @@
-## 5 4 emoji battle
+## emoji battle
+
+🚧 🚧 🚧 🚧
+a simple turn-based battle game
