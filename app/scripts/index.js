@@ -40,9 +40,9 @@ $(function(){
    // TODO: stamp character templates
 
 
-   selectedPlayer.$healthBar = $('.player .healthBar');
+   selectedPlayer.setHealthBar($('.player .healthBar'));
    console.log(selectedPlayer);
-   selectedEnemy.$healthBar  = $('.enemy .healthBar');
+   selectedEnemy.setHealthBar($('.enemy .healthBar'));
 
 
 
