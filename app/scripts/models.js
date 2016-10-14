@@ -35,10 +35,13 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 
 // // HP Bar set up.
 var healthBar = function myFunction(number) {
+//When change var d and n with the attack constructor!
   var d = new Date();
   var n = (d.getSeconds()/60*100).toFixed();
     document.querySelector('.healthBar').style.width = n + '%';
+    document.querySelector('.hp-number').textContent = n;
     console.log(n);
+    $(document).click('.hp-number')
 }
 healthBar();
 window.setInterval(healthBar, 1000);
