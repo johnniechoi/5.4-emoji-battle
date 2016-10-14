@@ -33,6 +33,7 @@ $(function(){
 
 
    var selectedPlayer = good[1];
+
    var selectedEnemy = bad[_.random(0,4)];
 
 
@@ -70,8 +71,6 @@ $(function(){
 
 $('button').click(function(event){
    event.preventDefault();
-   console.log('button pressed');
-   console.log('selectedPlayer: ',selectedPlayer);
    selectedPlayer.attack(selectedEnemy);
 });
 
