@@ -5,14 +5,18 @@ function Emoji(config) {
    config = config || {};
    $.extend(this, config);
    this.health = config.health || 25;
-   this.content = config.content;
+   this.content = config.content || '❓';
+   // this.power
 }
 
 Emoji.prototype.lowerHealth = function() {
    this.health -= _.random(2,6);
+   $(document).trigger('health:lowered' , this.health);
+
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){
+   // TODO: use this.power as an argument to lowerHealth()
    adversary.lowerHealth();
 }
 
@@ -31,6 +35,7 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 //Bad Guys
 
 // place your code here
+
 
 //exports!
 // module.exports = {

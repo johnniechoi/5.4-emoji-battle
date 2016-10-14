@@ -15,6 +15,8 @@ $(function(){
   //////////////////////
 
    // on 'start button' click assign selected character to player.
+   var selectedPlayer = new Emoji({health: 25, content: '👵🏼'});
+
 
    var good = [
      new models.Emoji({name: 'Smiley', image: '😁'}),
@@ -31,6 +33,10 @@ $(function(){
      new models.Emoji({name: 'Mask', image: '👺'})
      new models.Emoji({name: 'Scorpian', image: '🦂'})
    ];
+
+   var startingHealth = selectedPlayer.health;
+
+
 
 
   //////////////////
@@ -49,23 +55,21 @@ $(function(){
   // SETUP BATTLE //
   //////////////////
 
-  // // HP Bar set up.
-  var healthBar = function myFunction(number) {
-  //Change var d and n with the attack constructor!
-    var d = new Date();
-    var n = (d.getSeconds()/60*100).toFixed();
-  /////////////////////////////////////////////////////
-      document.querySelector('.healthBar').style.width = n + '%';
-      document.querySelector('.hp-number').textContent = n;
-      console.log(n);
-      $(document).click('.hp-number')
-  }
-  healthBar();
-  //no need for the set Interval. For example purposes. Change to evenlistener
-  //in order to drigger the healthBar.
-  window.setInterval(healthBar, 1000);
+
+
+// Create two serate divs left and right.
 
 
 
+// // HP Bar set up.
+var healthBar = function myFunction(health) {
+//When change var d and n with the attack constructor!
+    document.querySelector('.healthBar').style.width = n + '%';
+    document.querySelector('.hp-number').textContent = n;
+
+    console.log(n);
+    $(document).click('.hp-number')
+}
+healthBar();
 
 });
