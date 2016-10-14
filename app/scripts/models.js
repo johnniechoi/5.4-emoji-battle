@@ -5,14 +5,27 @@ function Emoji(config) {
    config = config || {};
    $.extend(this, config);
    this.health = config.health || 25;
-   this.content = config.content || '❓';
+   this.image = config.image || '❓';
+   this.name = config.name || 'unknown';
+
+   this.startingHealth = this.health;
    // this.power
+
+   if(config.$healthBar !== undefined) {
+      this.$healthBar = config.$healthBar;
+      this.$healthBar.textContent = this.health + '/' + this.startingHealth;
+   }
 }
+
+
+
 
 Emoji.prototype.lowerHealth = function() {
    this.health -= _.random(2,6);
-   $(document).trigger('health:lowered' , this.health);
 
+   // update
+   this.$healthBar.style.width = this.health/this.startingHealth + '%';
+   this.$healthBar.textContent = this.health + '/' + this.startingHealth;
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){
