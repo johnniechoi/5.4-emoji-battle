@@ -24,8 +24,10 @@ Emoji.prototype.lowerHealth = function() {
    this.health -= _.random(2,6);
 
    // update
-   this.$healthBar.style.width = this.health/this.startingHealth + '%';
-   this.$healthBar.textContent = this.health + '/' + this.startingHealth;
+   if(this.$healthbar !== undefined){
+      this.$healthBar.style.width = this.health/this.startingHealth + '%';
+      this.$healthBar.textContent = this.health + '/' + this.startingHealth;
+   }
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){

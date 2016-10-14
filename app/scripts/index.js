@@ -14,31 +14,33 @@ $(function(){
   // SELECT CHARACTER //
   //////////////////////
 
-   // on 'start button' click assign selected character to player.
-   var playerHealthBar = $(.player .healthBar);
-   var enemyHealthBar  = $(.enemy .healthBar);
-   var selectedPlayer = new Emoji({health: 25, image: '👵🏼', $healthBar: enemyHealthBar});
-
 
    var good = [
-     new models.Emoji({name: 'Smiley', image: '😁', $healthBar: playerHealthBar}),
-     new models.Emoji({name: 'GrandMaster', image: '👵🏻', $healthBar: playerHealthBar}),
-     new models.Emoji({name: 'Santa', image: '🎅🏻', $healthBar: playerHealthBar}),
-     new models.Emoji({name: 'Unicorn', image: '🦄', $healthBar: playerHealthBar})
-     new models.Emoji({name: 'Dragon', image: '🐉', $healthBar: playerHealthBar})
+     new models.Emoji({name: 'Smiley', image: '😁'}),
+     new models.Emoji({name: 'GrandMaster', image: '👵🏻'}),
+     new models.Emoji({name: 'Santa', image: '🎅🏻'}),
+     new models.Emoji({name: 'Unicorn', image: '🦄'})
+     new models.Emoji({name: 'Dragon', image: '🐉'})
    ];
 
    var bad = [
-     new models.Emoji({name: 'Ghost', image: '👻', $healthBar: enemyHealthBar}}),
-     new models.Emoji({name: 'Poop', image: '💩🏻', $healthBar: enemyHealthBar}}),
-     new models.Emoji({name: 'Skull', image: '💀🏻', $healthBar: enemyHealthBar}}),
-     new models.Emoji({name: 'Mask', image: '👺', $healthBar: enemyHealthBar}})
-     new models.Emoji({name: 'Scorpian', image: '🦂', $healthBar: enemyHealthBar}})
+     new models.Emoji({name: 'Ghost', image: '👻', $healthBar: enemyHealthBar}),
+     new models.Emoji({name: 'Poop', image: '💩🏻', $healthBar: enemyHealthBar}),
+     new models.Emoji({name: 'Skull', image: '💀🏻', $healthBar: enemyHealthBar}),
+     new models.Emoji({name: 'Mask', image: '👺', $healthBar: enemyHealthBar})
+     new models.Emoji({name: 'Scorpian', image: '🦂', $healthBar: enemyHealthBar})
    ];
 
 
-   var selectPlayer = good[1];
+   var selectedPlayer = good[1];
    var selectedEnemy = bad[_.random(0,4)];
+
+
+   // TODO: stamp character templates
+
+
+   selectedPlayer.$healthBar = $('.player .healthBar');
+   selectedEnemy.$healthBar  = $('.enemy .healthBar');
 
 
 
@@ -65,6 +67,9 @@ $(function(){
 
 
 
+$(button).click(function(event){
+   selectedPlayer.attack(selectedEnemy);
+});
 
 
 // on health:lowered event
