@@ -21,12 +21,14 @@ function Emoji(config) {
 
 
 Emoji.prototype.lowerHealth = function() {
-   this.health -= _.random(2,6);
+   this.health -= _.random(0,Math.min(6,this.health));
+   console.log('health: ',this.health);
 
    // update
-   if(this.$healthbar !== undefined){
-      this.$healthBar.style.width = this.health/this.startingHealth + '%';
-      this.$healthBar.textContent = this.health + '/' + this.startingHealth;
+   if(this.$healthBar instanceof $){
+      console.log('lowering health bar');
+      this.$healthBar.width(this.health/this.startingHealth*100 + '%');
+      this.$healthBar.text(this.health + '/' + this.startingHealth);
    }
 }
 
@@ -53,8 +55,6 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 
 
 //exports!
-// module.exports = {
-//   'CuteAnimal': CuteAnimal,
-//   'Puppy': Puppy,
-//   'Kitten': Kitten
-// };
+module.exports = {
+  'Emoji': Emoji
+};

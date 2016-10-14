@@ -19,16 +19,16 @@ $(function(){
      new models.Emoji({name: 'Smiley', image: '😁'}),
      new models.Emoji({name: 'GrandMaster', image: '👵🏻'}),
      new models.Emoji({name: 'Santa', image: '🎅🏻'}),
-     new models.Emoji({name: 'Unicorn', image: '🦄'})
+     new models.Emoji({name: 'Unicorn', image: '🦄'}),
      new models.Emoji({name: 'Dragon', image: '🐉'})
    ];
 
    var bad = [
-     new models.Emoji({name: 'Ghost', image: '👻', $healthBar: enemyHealthBar}),
-     new models.Emoji({name: 'Poop', image: '💩🏻', $healthBar: enemyHealthBar}),
-     new models.Emoji({name: 'Skull', image: '💀🏻', $healthBar: enemyHealthBar}),
-     new models.Emoji({name: 'Mask', image: '👺', $healthBar: enemyHealthBar})
-     new models.Emoji({name: 'Scorpian', image: '🦂', $healthBar: enemyHealthBar})
+     new models.Emoji({name: 'Ghost', image: '👻'}),
+     new models.Emoji({name: 'Poop', image: '💩🏻'}),
+     new models.Emoji({name: 'Skull', image: '💀🏻'}),
+     new models.Emoji({name: 'Mask', image: '👺'}),
+     new models.Emoji({name: 'Scorpian', image: '🦂'})
    ];
 
 
@@ -40,6 +40,7 @@ $(function(){
 
 
    selectedPlayer.$healthBar = $('.player .healthBar');
+   console.log(selectedPlayer);
    selectedEnemy.$healthBar  = $('.enemy .healthBar');
 
 
@@ -67,7 +68,10 @@ $(function(){
 
 
 
-$(button).click(function(event){
+$('button').click(function(event){
+   event.preventDefault();
+   console.log('button pressed');
+   console.log('selectedPlayer: ',selectedPlayer);
    selectedPlayer.attack(selectedEnemy);
 });
 
@@ -75,4 +79,4 @@ $(button).click(function(event){
 // on health:lowered event
 // $(document).on('health:lowered', )
 //
-// });
+});
