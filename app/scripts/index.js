@@ -31,20 +31,17 @@ $(function(){
  var goodcontext = {
     'good': good
     }
-var badcontext = {
-  'bad': bad
-}
+ var badcontext = {
+    'bad': bad
+    }
 
 
- $('.player').html(listTemplate(goodcontext));
- //
- $('.enemy').html(listTemplate(badcontext));
- // console.log(listTemplate);
-
-   var selectedPlayer = good[1];
+   var selectedPlayer = good[2];
 
    var selectedEnemy = bad[_.random(0,4)];
 
+   $('.player').html(listTemplate(goodcontext));
+   $('.enemy').html(listTemplate(badcontext));
 
    // TODO: stamp character templates
 

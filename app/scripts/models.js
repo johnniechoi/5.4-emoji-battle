@@ -8,8 +8,8 @@ function Emoji(config) {
    this.image = config.image || '❓';
    this.name = config.name || 'unknown';
 
-  //  this.startingHealth = this.health;
-   // this.power
+   this.startingHealth = this.health;
+   this.power
 
    if(config.$healthBar !== undefined) {
       this.$healthBar = config.$healthBar;
@@ -20,9 +20,15 @@ function Emoji(config) {
 Emoji.prototype.lowerHealth = function() {
    var hit = _.random(0,Math.min(6,this.health));
 
+//https://github.com/daneden/animate.css <--- This stuff is super cool!---> .JC
    if(hit > 0){
-      this.$healthBar.parent().prev().addClass('animated shake');
-   }
+      this.$healthBar.parent().prev().on('click', function(){
+          $('.enemy').addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass('animated shake')
+          });
+      });
+   };
+   
    this.health -= hit;
    console.log('health: ',this.health);
 
