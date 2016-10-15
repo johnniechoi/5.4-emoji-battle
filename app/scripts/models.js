@@ -8,7 +8,7 @@ function Emoji(config) {
    this.image = config.image || '❓';
    this.name = config.name || 'unknown';
 
-   this.startingHealth = this.health;
+  //  this.startingHealth = this.health;
    // this.power
 
    if(config.$healthBar !== undefined) {
@@ -17,14 +17,11 @@ function Emoji(config) {
    }
 }
 
-
-
-
 Emoji.prototype.lowerHealth = function() {
    var hit = _.random(0,Math.min(6,this.health));
 
    if(hit > 0){
-      //this.$healthBar.parent().prev().addClass('animated shake');
+      this.$healthBar.parent().prev().addClass('animated shake');
    }
    this.health -= hit;
    console.log('health: ',this.health);

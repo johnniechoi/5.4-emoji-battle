@@ -1,19 +1,16 @@
 var $ = require('jQuery');
 var _ = require('underscore');
 var models = require('./models');
-
-
+var listTemplate = require('../templates/application.hbs');
 
 // wait for DOM to be ready
 $(function(){
-
 
   var player; // selected character
 
   //////////////////////
   // SELECT CHARACTER //
   //////////////////////
-
 
    var good = [
      new models.Emoji({name: 'Smiley', image: '😁'}),
@@ -31,6 +28,18 @@ $(function(){
      new models.Emoji({name: 'Scorpian', image: '🦂'})
    ];
 
+ var goodcontext = {
+    'good': good
+    }
+var badcontext = {
+  'bad': bad
+}
+
+
+ $('.player').html(listTemplate(goodcontext));
+ //
+ $('.enemy').html(listTemplate(badcontext));
+ // console.log(listTemplate);
 
    var selectedPlayer = good[1];
 
@@ -43,7 +52,6 @@ $(function(){
    selectedPlayer.$healthBar = $('.player .healthBar');
    console.log(selectedPlayer);
    selectedEnemy.$healthBar  = $('.enemy .healthBar');
-
 
 
   //////////////////
@@ -63,19 +71,9 @@ $(function(){
   // SETUP BATTLE //
   //////////////////
 
-
-
-// Create two serate divs left and right.
-
-
-
 $('button').click(function(event){
    event.preventDefault();
    selectedPlayer.attack(selectedEnemy);
 });
 
-
-// on health:lowered event
-// $(document).on('health:lowered', )
-//
 });
