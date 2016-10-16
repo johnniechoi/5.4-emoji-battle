@@ -18,6 +18,7 @@ img {
   max-width: 100%;
 }
 
+<<<<<<< HEAD
 .player{
   margin-top: 49px;
   font-size: 120px;
@@ -37,24 +38,45 @@ img {
 .enemy {
   font-size: 120px;
   line-height: 200px;
+=======
+.player, .enemy
+   {
+
+  //line-height: 400px;
+>>>>>>> integrated emojione
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 400px;
-    text-shadow: 0px 3px 0px #b2a98f,
-                 0px 14px 10px rgba(0,0,0,0.15),
-                 0px 24px 2px rgba(0,0,0,0.1),
-                 0px 34px 30px rgba(0,0,0,0.1);
+
+}
+
+.enemy{
+   .healthBar {
+      margin-right: 0 !important;
+      margin-left: auto;
+      text-align: left;
+   }
 }
 
 .button-styles{
+<<<<<<< HEAD
   display: flex;
+=======
+   display:flex;
+>>>>>>> integrated emojione
   position: relative;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 100px;
+<<<<<<< HEAD
+=======
+  margin-top: 20px;
+  padding-left: 20px;
+
+>>>>>>> integrated emojione
 }
 
 .myProgress {
@@ -77,6 +99,7 @@ img {
   text-shadow: none;
 text-align: right;
 }
+<<<<<<< HEAD
 
 .hp-numbers{
   // display: flex;
@@ -100,3 +123,5 @@ text-align: right;
   // justify-content: flex-end;
   // margin-top: 30px;
 }
+=======
+>>>>>>> integrated emojione

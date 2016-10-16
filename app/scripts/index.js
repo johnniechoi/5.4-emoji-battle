@@ -1,5 +1,6 @@
 var $ = require('jQuery');
 var _ = require('underscore');
+var emojione = require('emojione')
 var models = require('./models');
 var listTemplate = require('../templates/application.hbs');
 
@@ -42,8 +43,11 @@ var selectedEnemy = bad[0];
    // TODO: stamp character templates
 
    selectedPlayer.setHealthBar($('.player .healthBar'));
-   console.log(selectedPlayer);
    selectedEnemy.setHealthBar($('.enemy .healthBar'));
+
+
+   $('.player .character-image ').html(selectedPlayer.image);
+   $('.enemy .character-image ').html(selectedEnemy.image);
 
   //////////////////
   // SELECT ENEMY //
