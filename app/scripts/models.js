@@ -52,14 +52,20 @@ Emoji.prototype.lowerHealth = function(power) {
       $animate.addClass('animated shake').one(animationEnd, function(){
          $animate.removeClass('animated shake');
       });
-   
 
-   // update
+
+   // update health bar
    if(this.$healthBar instanceof $) {
       console.log('lowering health bar');
       this.$healthBar.width(this.health/this.startingHealth*100 + '%');
       this.$healthBar.text(this.health + '/' + this.startingHealth);
    }
+
+
+   if(this.health === 0){
+      $(document).trigger('emoji:death', this);
+   }
+
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){

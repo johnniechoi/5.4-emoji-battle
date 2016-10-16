@@ -84,11 +84,26 @@ text-align: right;
 }
 
 .select-panel{
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
    display: flex;
+
+   &.hide{
+      display: none;
+   }
+
    flex-flow: row wrap;
-   width: 300px;
-   img{
-      width: 50px;
-      padding: 5px;
+   justify-content: center;
+   align-items: center;
+   background-color:white;
+   z-index: 4;
+
+
+   svg{
+      width: 100px;
+      padding: 30px;
    }
 }
