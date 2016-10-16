@@ -98,12 +98,21 @@ text-align: right;
    flex-flow: row wrap;
    justify-content: center;
    align-items: center;
+   align-content: center;
    background-color:white;
    z-index: 4;
 
 
    svg{
-      width: 100px;
-      padding: 30px;
+      width: 80px;
+      margin: 24px;
+      cursor: pointer;
+      &:hover{
+         -webkit-animation: shake 1s;
+          animation: shake 1s;
+      }
    }
+
+
+
 }

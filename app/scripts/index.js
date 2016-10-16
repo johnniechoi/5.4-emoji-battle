@@ -21,12 +21,6 @@ var good = [ new models.Emoji({power: 8, health: 25, code: ':grinning:'   }),
 
 $(function(){
 
-  var player; // selected character
-
-  //////////////////////
-  // SELECT CHARACTER //
-  //////////////////////
-
    var selectedPlayer = good[0];
 
    $('#app').append("<div class='select-panel'></div>");
@@ -59,9 +53,13 @@ $(function(){
 
          $('button').click(function(event){
             event.preventDefault();
+            $('button').prop('disabled', true);
             setTimeout(function(){
                selectedEnemy.attack(selectedPlayer);
-            }, 2000);
+               setTimeout(function(){
+                  $('button').prop('disabled', false);
+               }, 1000); // small extra delay for button
+            }, 1500);  // delay for enemy attack
             selectedPlayer.attack(selectedEnemy);
           });
 
