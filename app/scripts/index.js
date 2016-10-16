@@ -13,43 +13,37 @@ $(function(){
   //////////////////////
 
    var good = [
-     new models.Emoji({name: 'Smiley', image: '😁'}),
-     new models.Emoji({name: 'GrandMaster', image: '👵🏻'}),
-     new models.Emoji({name: 'Santa', image: '🎅🏻'}),
-     new models.Emoji({name: 'Unicorn', image: '🦄'}),
-     new models.Emoji({name: 'Dragon', image: '🐉'})
+     new models.Emoji({name: 'Smiley', image: '😁'})
+    //  new models.Emoji({name: 'GrandMaster', image: '👵🏻'}),
+    //  new models.Emoji({name: 'Santa', image: '🎅🏻'}),
+    //  new models.Emoji({name: 'Unicorn', image: '🦄'}),
+    //  new models.Emoji({name: 'Dragon', image: '🐉'})
    ];
 
    var bad = [
-     new models.Emoji({name: 'Ghost', image: '👻'}),
-     new models.Emoji({name: 'Poop', image: '💩🏻'}),
-     new models.Emoji({name: 'Skull', image: '💀🏻'}),
-     new models.Emoji({name: 'Mask', image: '👺'}),
-     new models.Emoji({name: 'Scorpian', image: '🦂'})
+     new models.Emoji({name: 'Ghost', image: '👻'})
+    //  new models.Emoji({name: 'Poop', image: '💩🏻'}),
+    //  new models.Emoji({name: 'Skull', image: '💀🏻'}),
+    //  new models.Emoji({name: 'Mask', image: '👺'}),
+    //  new models.Emoji({name: 'Scorpian', image: '🦂'})
    ];
 
- var goodcontext = {
-    'good': good
-    }
- var badcontext = {
-    'bad': bad
-    }
+console.log('underbad: ', bad);
 
+var selectedPlayer = good[0];
+var selectedEnemy = bad[0];
 
-   var selectedPlayer = good[2];
-
-   var selectedEnemy = bad[_.random(0,4)];
+ var goodcontext = {'good': good}
+ var badcontext = {'bad': bad}
 
    $('.player').html(listTemplate(goodcontext));
    $('.enemy').html(listTemplate(badcontext));
 
    // TODO: stamp character templates
 
-
    selectedPlayer.$healthBar = $('.player .healthBar');
    console.log(selectedPlayer);
    selectedEnemy.$healthBar  = $('.enemy .healthBar');
-
 
   //////////////////
   // SELECT ENEMY //
@@ -70,7 +64,9 @@ $(function(){
 
 $('button').click(function(event){
    event.preventDefault();
+ //   setTimeout(function(){
+ //   selectedEnemy.attack(selectedPlayer);
+ // }, 2000);
    selectedPlayer.attack(selectedEnemy);
-});
-
+ });
 });

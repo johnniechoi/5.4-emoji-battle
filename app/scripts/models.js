@@ -18,17 +18,18 @@ function Emoji(config) {
 }
 
 Emoji.prototype.lowerHealth = function() {
-   var hit = _.random(0,Math.min(6,this.health));
+   var hit = _.random(1,Math.min(6,this.health));
 
 //https://github.com/daneden/animate.css <--- This stuff is super cool!---> .JC
    if(hit > 0){
       this.$healthBar.parent().prev().on('click', function(){
-          $('.enemy').addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-            $(this).removeClass('animated shake')
-          });
-      });
-   };
-   
+          $(this).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+          function(){
+          $(this).removeClass('animated shake')
+        });
+    });
+ };
+
    this.health -= hit;
    console.log('health: ',this.health);
 
@@ -45,8 +46,12 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
    adversary.lowerHealth();
 }
 
-
 // Good guys
+
+// Emoji.prototype = new Bad();
+// bad{
+//
+// }
 
 // function (config){
 //   attack.call(this, config);
