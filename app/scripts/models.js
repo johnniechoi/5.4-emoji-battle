@@ -11,18 +11,14 @@ emojione.imagePathSVGSprites = '../../node_modules/emojione/assets/sprites/emoji
 function Emoji(config) {
    config = config || {};
    $.extend(this, config);
-   this.image  = emojione.toImage(config.image) || emojione.toImage('❓');
+   this.code   = config.code || ':question:';
    this.health = config.health || 24;
-   this.name   = config.name || 'unknown';
-   this.power = config.power || 4;
 
+   this.power   = config.power || 4;
+   // this.defense = config.defense || 4;
+
+   this.image  = emojione.toImage(this.code);
    this.startingHealth = this.health;
-
-
-   if(this.$healthBar instanceof $) {
-      this.$healthBar = config.$healthBar;
-      this.$healthBar.textContent = this.health + '/' + this.startingHealth;
-   }
 }
 
 Emoji.prototype.setHealthBar = function(healthBar){
@@ -31,29 +27,32 @@ Emoji.prototype.setHealthBar = function(healthBar){
 }
 
 Emoji.prototype.lowerHealth = function(power) {
-   var hit = _.random(1,Math.min(6,this.health));
+   var hit = Math.ceil(power*Math.random());
+   hit = Math.min(hit,this.health);
 
-//https://github.com/daneden/animate.css <--- This stuff is super cool!---> .JC
-   if(hit > 0){
-
-      this.$healthBar.parent().prev().on('click', function(){
-          $(this).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-          function(){
-          $(this).removeClass('animated shake')
-        });
-    });
- };
-
-      // 
-      // var $animate = this.$healthBar.prev();
-      // var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-      // $animate.addClass('animated shake').one(animationEnd, function(){
-      //    $animate.removeClass('animated shake');
-      // });
-   }
+   //add this.defense
 
    this.health -= hit;
    console.log('health: ',this.health);
+
+//https://github.com/daneden/animate.css <--- This stuff is super cool!---> .JC
+   // if(hit > 0){
+   //
+   //    this.$healthBar.parent().prev().on('click', function(){
+   //        $(this).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+   //        function(){
+   //        $(this).removeClass('animated shake')
+   //      });
+   //  });
+ // };
+
+
+      var $animate = this.$healthBar.prev();
+      var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+      $animate.addClass('animated shake').one(animationEnd, function(){
+         $animate.removeClass('animated shake');
+      });
+   
 
    // update
    if(this.$healthBar instanceof $) {
@@ -91,5 +90,6 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 
 //exports!
 module.exports = {
-  'Emoji': Emoji
+  'Emoji':     Emoji,
+  'emojione':  emojione
 };

@@ -2,7 +2,6 @@ var $ = require('jQuery');
 var _ = require('underscore');
 var emojione = require('emojione')
 var models = require('./models');
-var listTemplate = require('../templates/application.hbs');
 
 // wait for DOM to be ready
 $(function(){
@@ -13,41 +12,51 @@ $(function(){
   // SELECT CHARACTER //
   //////////////////////
 
-   var good = [
-     new models.Emoji({name: 'Smiley', image: '😁'})
-    //  new models.Emoji({name: 'GrandMaster', image: '👵🏻'}),
-    //  new models.Emoji({name: 'Santa', image: '🎅🏻'}),
-    //  new models.Emoji({name: 'Unicorn', image: '🦄'}),
-    //  new models.Emoji({name: 'Dragon', image: '🐉'})
-   ];
+  var good = [ new models.Emoji({power: 8, health: 25, code: ':grinning:'   }),
+               new models.Emoji({power: 8, health: 25, code: ':older_woman:'}),
+               new models.Emoji({power: 8, health: 25, code: ':santa:'      }),
+               new models.Emoji({power: 8, health: 25, code: ':unicorn:'    }),
+               new models.Emoji({power: 8, health: 25, code: ':dragon:'     })
+             ];
 
-   var bad = [
-     new models.Emoji({name: 'Ghost', image: '👻'})
-    //  new models.Emoji({name: 'Poop', image: '💩🏻'}),
-    //  new models.Emoji({name: 'Skull', image: '💀🏻'}),
-    //  new models.Emoji({name: 'Mask', image: '👺'}),
-    //  new models.Emoji({name: 'Scorpian', image: '🦂'})
-   ];
+   var bad = [ new models.Emoji({power: 8, health: 25, code: ':poop:' }),
+               new models.Emoji({power: 8, health: 25, code: ':robot:'}),
+               new models.Emoji({power: 8, health: 25, code: ':alien:'}),
+               new models.Emoji({power: 8, health: 25, code: ':imp:'   })
+             ];
 
-console.log('underbad: ', bad);
 
-var selectedPlayer = good[0];
-var selectedEnemy = bad[0];
 
- var goodcontext = {'good': good}
- var badcontext = {'bad': bad}
+   //
+   // $().appendTo('.app');
+   // $('.app').append("<div class='select-panel'></div>");
+   // var $select = $('.select-panel');
+   //
+   // // fill selection panel
+   // _.each(good, function(emo){
+   //    $select.append(emo.image);
+   // })
 
-   $('.player').html(listTemplate(goodcontext));
-   $('.enemy').html(listTemplate(badcontext));
 
-   // TODO: stamp character templates
+
+
+
+   var selectedPlayer = good[0];
+   var selectedEnemy = bad[1];
+   //var selectedEnemy = _.sample[bad];
+
+   // $('#app').html("<div class='player'></div><div class='enemy'></div>");
+
+   $('.player .image').html(selectedPlayer.image);
+   $('.enemy .image').html(selectedEnemy.image);
+   //
 
    selectedPlayer.setHealthBar($('.player .healthBar'));
    selectedEnemy.setHealthBar($('.enemy .healthBar'));
 
 
-   $('.player .character-image ').html(selectedPlayer.image);
-   $('.enemy .character-image ').html(selectedEnemy.image);
+   // $('.player .character-image ').html(selectedPlayer.image);
+   // $('.enemy .character-image ').html(selectedEnemy.image);
 
   //////////////////
   // SELECT ENEMY //
