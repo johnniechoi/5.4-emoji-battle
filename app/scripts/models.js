@@ -11,10 +11,15 @@ function Emoji(config) {
    this.startingHealth = this.health;
    this.power
 
-   if(config.$healthBar !== undefined) {
+   if(this.$healthBar instanceof $) {
       this.$healthBar = config.$healthBar;
       this.$healthBar.textContent = this.health + '/' + this.startingHealth;
    }
+}
+
+Emoji.prototype.setHealthBar = function(healthBar){
+   this.$healthBar = healthBar;
+   this.$healthBar.text(this.health + '/' + this.startingHealth);
 }
 
 Emoji.prototype.lowerHealth = function() {

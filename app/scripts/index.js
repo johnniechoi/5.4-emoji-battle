@@ -41,9 +41,9 @@ var selectedEnemy = bad[0];
 
    // TODO: stamp character templates
 
-   selectedPlayer.$healthBar = $('.player .healthBar');
+   selectedPlayer.setHealthBar($('.player .healthBar'));
    console.log(selectedPlayer);
-   selectedEnemy.$healthBar  = $('.enemy .healthBar');
+   selectedEnemy.setHealthBar($('.enemy .healthBar'));
 
   //////////////////
   // SELECT ENEMY //
@@ -64,9 +64,9 @@ var selectedEnemy = bad[0];
 
 $('button').click(function(event){
    event.preventDefault();
- //   setTimeout(function(){
- //   selectedEnemy.attack(selectedPlayer);
- // }, 2000);
+   setTimeout(function(){
+   selectedEnemy.attack(selectedPlayer);
+ }, 2000);
    selectedPlayer.attack(selectedEnemy);
  });
 });
