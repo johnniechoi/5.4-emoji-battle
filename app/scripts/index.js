@@ -18,108 +18,70 @@ var good = [
   new models.Emoji({power: 8, health: 18, code: ':imp:'   })
  ];
 
-
 // wait for DOM to be ready
 $(function(){
 
    var $select = $('.overlay');
-   var $attackButton = $('button')
+   var $attackButton = $('button');
+   var $playerSelect = $('.select-panel');
 
    var selectedPlayer;
    var selectedEnemy;
-   var $attackButton = $('button');
 
    var gameOver = false;
 
-   $select.append('<div class="select-panel"></div>');
-   var $playerSelect = $('.select-panel');
-
    // fill selection panel
    _.each(good, function(emo){
+     var $image = $(emo.image);
 
-      var $image = $(emo.image);
-
-
-      $image.click(function(event) {
-         $(this).addClass("animated pulse").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-            $(this).removeClass("animated pulse");
-            setTimeout(function(){
-               $select.empty();
-               $select.addClass('hide');
-            },1000);
-
-         });
-
-         selectedPlayer = emo;
-         selectedEnemy  = _.sample(bad);
-
-         // $select.append('<div class="enemy-select half"></div>');
-         // var $enemySelect = $('.enemy-select');
-
-         // _.each(bad, function(emo){
-         //    var $image = $(emo.image);
-         //    $enemySelect.append($image);
-         //    if(emo !== selectedEnemy){
-         //       $image.addClass("animated tada").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-         //          $(this).removeClass("animated bounce");
-         //       });
-         //    }
-         //    else {
-         //
-         //       $image.addClass("animated tada").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-         //          $(this).removeClass("animated tada");
-         //       });
-         //    }
-         // });
-
-
-            $attackButton.html(emojione.toImage(':dagger:'));
-         $('.player .image').html(selectedPlayer.image);
-         $('.enemy .image').html(selectedEnemy.image);
-
-
-   $().appendTo('.app');
-   $('.app').append("<div class='select-panel'></div>");
-   var $select = $('.select-panel');
-
-   // fill selection panel
-   _.each(good, function(emo){
-      $select.append(emo.image);
-   })
-
-   var selectedPlayer = good[0];
-   var selectedEnemy = bad[0];
-  //  var selectedEnemy = _.sample[bad];
-
-  //  $('#app').html("<div class='player'></div><div class='enemy'></div>");
-
-
-         selectedPlayer.setHealthBar($('.player .healthBar'));
-         selectedEnemy.setHealthBar($('.enemy .healthBar'));
-
-            // $('.player .image').html(selectedPlayer.image);
-            // $('.enemy .image').html(selectedEnemy.image);
-
-            selectedPlayer.setHealthBar($('.player .healthBar'));
-            selectedEnemy.setHealthBar($('.enemy .healthBar'));
-         });
-      });
-
-      $image.mouseenter(function(event){
-         $(this).find('use').addClass("animated bounce");
-      });
-      $image.on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-         $(this).find('use').removeClass("animated bounce");
+     // Register event handlers on the emoji images
+     $image.on('click', function(event){
+       event.preventDefault();
+       $(document).trigger('emoji:selected', [emo]);
+     }).mouseenter(function(event){
+        $(this).find('use').addClass("animated bounce");
+     }).on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+        $(this).find('use').removeClass("animated bounce");
      });
 
       $playerSelect.append($image);
    });
 
+   // Add attack button dagger
+   $attackButton.html(emojione.toImage(':dagger:'));
 
+
+   // Event handler for good guy selection
+   $(document).on('emoji:selected', function(event, emoji) {
+     // Animate the user selected emoji to signal the selection to user
+    //  $(this).addClass("animated pulse").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+    //     $(this).removeClass("animated pulse");
+    //     setTimeout(function(){
+    //        $select.empty();
+    //        $select.addClass('hide');
+    //     }, 1000);
+    //  });
+
+    $select.empty();
+    $select.addClass('hide');
+
+     // Setup character selection
+     selectedPlayer = emoji;
+     selectedEnemy  = _.sample(bad);
+    $('.player .image').html(selectedPlayer.image);
+    $('.enemy .image').html(selectedEnemy.image);
+
+    selectedPlayer.setHealthBar($('.player .healthBar'));
+    selectedEnemy.setHealthBar($('.enemy .healthBar'));
+
+   });
+
+   // Event handler for attack button
    $attackButton.click(function(event){
       event.preventDefault();
 
       $attackButton.prop('disabled', true);
+
       $(this).addClass('animated swing').on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
          $(this).removeClass("animated swing");
       });
@@ -138,6 +100,7 @@ $(function(){
 
    $(document).on('emoji:death', function(event, deceased){
       if(deceased === selectedPlayer) {   // player died
+
          $('.player svg').addClass('animated hinge')
             .on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
                $('.player .image').html(emojione.toImage(':skull:'));
@@ -145,8 +108,8 @@ $(function(){
                selectedPlayer.$healthBar.empty();
                $attackButton.prop('disabled', true);
          });
-      }
-      else {   // enemy died
+
+      } else {   // enemy died
          $('.enemy svg').addClass('animated hinge')
             .on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
                $('.enemy .image').html(emojione.toImage(':skull:'));
