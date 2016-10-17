@@ -29,12 +29,15 @@ var makePanel = function( $name) {
 $(function(){
 
    var $select = $('.overlay');
+   var $attackButton = $('button')
 
    var $playerSelect = makePanel('select');
    $select.append($playerSelect);
 
    var selectedPlayer;
    var selectedEnemy;
+
+
 
    // fill selection panel
    _.each(good, function(emo){
@@ -50,11 +53,12 @@ $(function(){
             selectedPlayer = emo;
             selectedEnemy  = _.sample(bad);
 
-            $('button').html(emojione.toImage(':dagger:'));
-            $('button').click(function(event){
-               $(this).addClass('animated swing').on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-                  $(this).removeClass("animated swing");
-               });
+            var $attackButton = $('button');
+            $attackButton.html(emojione.toImage(':dagger:'));
+
+            $attackButton.click(function(event){
+               event.preventDefault();
+
             });
 
             $('.player .image').html(selectedPlayer.image);
@@ -100,18 +104,25 @@ $(function(){
    });
 
 
-   $('button').click(function(event){
-      event.preventDefault();
-      $('button').prop('disabled', true);
 
-      setTimeout(function(){
-         selectedEnemy.attack(selectedPlayer);
-         setTimeout(function(){
-            $('button').prop('disabled', false);
-         }, 800); // extra delay for button
-      }, 1500);  // delay for enemy attack
+
+   $attackButton.click(function(event){
+      event.preventDefault();
+      $(this).addClass('animated swing').on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+         $(this).removeClass("animated swing");
+         $attackButton.prop('disabled', true);
+      });
+
 
       selectedPlayer.attack(selectedEnemy);
+      if(selectedEnemy.health != 0){
+         setTimeout(function(){
+            selectedEnemy.attack(selectedPlayer);
+            setTimeout(function(){
+               $attackButton.prop('disabled', false);
+            }, 800); // extra delay for button
+         }, 1500);  // delay for enemy attack
+      }
    });
 
    $(document).on('emoji:death', function(event, deceased){
@@ -121,7 +132,8 @@ $(function(){
             .on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
                $('.player .image').html(emojione.toImage(':skull:'));
                $('.player svg').addClass('animated fadeIn');
-               $('button').prop('disabled', true);
+               selectedPlayer.$healthBar.empty();
+               $attackButton.prop('disabled', true);
             }
          );
 
@@ -132,7 +144,8 @@ $(function(){
             .on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
                $('.enemy .image').html(emojione.toImage(':skull:'));
                $('.enemy svg').addClass('animated fadeIn');
-               $('button').prop('disabled', true);
+               selectedEnemy.$healthBar.empty();
+               $attackButton.prop('disabled', true);
          });
      }
 
