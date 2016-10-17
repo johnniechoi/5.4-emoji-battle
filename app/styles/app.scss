@@ -3,9 +3,9 @@
 $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 
 // Import Bootstrap
-@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
-@import '../../node_modules/animate\.css/animate.min.css';
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+// @import '../../node_modules/animate.css/animate';
 
 
 *,
@@ -18,6 +18,9 @@ img {
   max-width: 100%;
 }
 
+body{
+   margin-bottom: 32px;
+}
 
 .player, .enemy
    {
@@ -29,13 +32,22 @@ img {
   justify-content: center;
   height: 400px;
 
+  .image{
+     width: 100%;
+  }
+
 }
 
 .enemy{
+   .image{
+      text-align: right;
+   }
    .healthBar {
       margin-right: 0 !important;
       margin-left: auto;
       text-align: left;
+      overflow:hidden;
+
    }
 }
 
@@ -47,8 +59,20 @@ img {
   align-items: center;
   justify-content: center;
   height: 100px;
-  margin-top: 20px;
+  background-color: none;
+  //min-height: 100px;
+  margin-top: 200px;
   padding-left: 20px;
+  height:100%;
+
+  button{
+     background-color: transparent;
+     border: none;
+      outline-offset: 0px !important;
+     outline: 0 !important;
+     box-shadow: none !important;
+ }
+
 
 
 }
@@ -68,23 +92,20 @@ img {
   height: 29px;
   line-height:29px;
   background-color: #88BCE3;
-  transition: all 1s linear;
+  transition: all .8s;
   margin-right: auto;
   margin-top: 24px;
   text-shadow: none;
-<<<<<<< HEAD
-   text-align: right;
-=======
   text-align: right;
->>>>>>> last commit
+   overflow:hidden;
 }
 
 
-.shake {
-  -vendor-animation-duration: 6s;
-  -vendor-animation-delay: 2s;
-  -vendor-animation-iteration-count: infinite;
-}
+// .shake {
+//   -vendor-animation-duration: 6s;
+//   -vendor-animation-delay: 2s;
+//   -vendor-animation-iteration-count: infinite;
+// }
 
 
 
@@ -122,11 +143,14 @@ img {
    align-content: center;
 
 
-
    svg{
       width: 80px;
-      margin: 24px;
+      margin: 4px 24px;
       cursor: pointer;
+
+      &:hover{
+         border-bottom: 2px solid #bbb;
+      }
    }
 
 
@@ -136,4 +160,17 @@ img {
 
    }
 
+}
+
+audio {
+   position:fixed;
+   bottom:0;
+    width: 100%;
+    opacity: .5;
+    z-index: 8;
+    transition: opacity .3s;
+
+    &:hover{
+      opacity: 1;
+   }
 }

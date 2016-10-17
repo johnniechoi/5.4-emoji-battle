@@ -18,22 +18,29 @@ var good = [
   new models.Emoji({power: 8, health: 18, code: ':imp:'   })
  ];
 
+
 // wait for DOM to be ready
 $(function(){
 
    var $select = $('.overlay');
-   $select.append('<div class="select-panel"></div>');
-   var $playerSelect = $('.select-panel');
+   var $attackButton = $('button')
 
    var selectedPlayer;
    var selectedEnemy;
+   var $attackButton = $('button');
+
+   var gameOver = false;
+
+   $select.append('<div class="select-panel"></div>');
+   var $playerSelect = $('.select-panel');
 
    // fill selection panel
    _.each(good, function(emo){
+
       var $image = $(emo.image);
 
-      $image.click(function(event) {
 
+      $image.click(function(event) {
          $(this).addClass("animated pulse").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
             $(this).removeClass("animated pulse");
             setTimeout(function(){
@@ -66,6 +73,7 @@ $(function(){
          // });
 
 
+            $attackButton.html(emojione.toImage(':dagger:'));
          $('.player .image').html(selectedPlayer.image);
          $('.enemy .image').html(selectedEnemy.image);
 
@@ -89,44 +97,68 @@ $(function(){
          selectedPlayer.setHealthBar($('.player .healthBar'));
          selectedEnemy.setHealthBar($('.enemy .healthBar'));
 
+            // $('.player .image').html(selectedPlayer.image);
+            // $('.enemy .image').html(selectedEnemy.image);
 
+            selectedPlayer.setHealthBar($('.player .healthBar'));
+            selectedEnemy.setHealthBar($('.enemy .healthBar'));
+         });
       });
 
       $image.mouseenter(function(event){
-         $(this).addClass("animated bounce");
-      })
-
+         $(this).find('use').addClass("animated bounce");
+      });
       $image.on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-         $(this).removeClass("animated bounce");
+         $(this).find('use').removeClass("animated bounce");
      });
 
       $playerSelect.append($image);
    });
 
 
-   $('button').click(function(event){
+   $attackButton.click(function(event){
       event.preventDefault();
-      $('button').prop('disabled', true);
+
+      $attackButton.prop('disabled', true);
+      $(this).addClass('animated swing').on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+         $(this).removeClass("animated swing");
+      });
+
+      selectedPlayer.attack(selectedEnemy);
+
       setTimeout(function(){
          selectedEnemy.attack(selectedPlayer);
          setTimeout(function(){
-            $('button').prop('disabled', false);
+            if(!gameOver){ // keep disabled if game is over
+               $attackButton.prop('disabled', false);
+            }
          }, 800); // extra delay for button
       }, 1500);  // delay for enemy attack
-      selectedPlayer.attack(selectedEnemy);
    });
 
    $(document).on('emoji:death', function(event, deceased){
-      if(deceased === selectedPlayer) {
-         console.log('Player died');
+      if(deceased === selectedPlayer) {   // player died
+         $('.player svg').addClass('animated hinge')
+            .on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+               $('.player .image').html(emojione.toImage(':skull:'));
+               $('.player svg').addClass('animated fadeIn');
+               selectedPlayer.$healthBar.empty();
+               $attackButton.prop('disabled', true);
+         });
       }
-      else {
-         console.log('Enemy died');
-      }
-   });
+      else {   // enemy died
+         $('.enemy svg').addClass('animated hinge')
+            .on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+               $('.enemy .image').html(emojione.toImage(':skull:'));
+               $('.enemy svg').addClass('animated fadeIn');
+               selectedEnemy.$healthBar.empty();
+         });
+     }
 
-   }
+     gameOver = true;
+     $attackButton.prop('disabled', true);
 
 
+  });
 
 });

@@ -6,7 +6,7 @@ var emojione = require('emojione')
 
 emojione.imageType = 'svg';
 emojione.sprites = true;
-emojione.imagePathSVGSprites = '../../node_modules/emojione/assets/sprites/emojione.sprites.svg';
+emojione.imagePathSVGSprites = './fonts/emojione.sprites.svg';
 
 function Emoji(config) {
    config = config || {};
@@ -60,8 +60,9 @@ Emoji.prototype.lowerHealth = function(power) {
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){
-   // TODO: use this.power as an argument to lowerHealth()
-   adversary.lowerHealth(this.power);
+   if(this.health > 0){
+      adversary.lowerHealth(this.power);
+   }
 }
 
 
