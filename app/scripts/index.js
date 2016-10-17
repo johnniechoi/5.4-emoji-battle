@@ -23,7 +23,7 @@ var good = [ new models.Emoji({power: 8, health: 25, code: ':grinning:'   }),
 
 // '<div class="{name}-panel"></div>'
 var makePanel = function( $name) {
-   return $('<div class="'+ $name +'-panel">');
+   return;
 };
 
 $(function(){
@@ -31,12 +31,13 @@ $(function(){
    var $select = $('.overlay');
    var $attackButton = $('button')
 
-   var $playerSelect = makePanel('select');
-   $select.append($playerSelect);
+
+   $select.append('<div class="select-panel"></div>');
+   var $playerSelect = $('.select-panel');
 
    var selectedPlayer;
    var selectedEnemy;
-
+   var $attackButton = $('button');
 
 
    // fill selection panel
@@ -53,13 +54,9 @@ $(function(){
             selectedPlayer = emo;
             selectedEnemy  = _.sample(bad);
 
-            var $attackButton = $('button');
+
             $attackButton.html(emojione.toImage(':dagger:'));
 
-            $attackButton.click(function(event){
-               event.preventDefault();
-
-            });
 
             $('.player .image').html(selectedPlayer.image);
             $('.enemy .image').html(selectedEnemy.image);
@@ -67,28 +64,7 @@ $(function(){
             selectedPlayer.setHealthBar($('.player .healthBar'));
             selectedEnemy.setHealthBar($('.enemy .healthBar'));
 
-            // $select.append('<div class="enemy-select half"></div>');
-            // var $enemySelect = $('.enemy-select');
-
-            // _.each(bad, function(emo){
-            //    var $image = $(emo.image);
-            //    $enemySelect.append($image);
-            //    if(emo !== selectedEnemy){
-            //       $image.addClass("animated tada").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-            //          $(this).removeClass("animated bounce");
-            //       });
-            //    }
-            //    else {
-            //
-            //       $image.addClass("animated tada").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
-            //          $(this).removeClass("animated tada");
-            //       });
-            //    }
-            // });
-
          });
-
-
 
       });
 
@@ -108,21 +84,21 @@ $(function(){
 
    $attackButton.click(function(event){
       event.preventDefault();
+      $attackButton.prop('disabled', true);
       $(this).addClass('animated swing').on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
          $(this).removeClass("animated swing");
-         $attackButton.prop('disabled', true);
+
       });
 
 
       selectedPlayer.attack(selectedEnemy);
-      if(selectedEnemy.health != 0){
+
+      setTimeout(function(){
+         selectedEnemy.attack(selectedPlayer);
          setTimeout(function(){
-            selectedEnemy.attack(selectedPlayer);
-            setTimeout(function(){
-               $attackButton.prop('disabled', false);
-            }, 800); // extra delay for button
-         }, 1500);  // delay for enemy attack
-      }
+            $attackButton.prop('disabled', false);
+         }, 800); // extra delay for button
+      }, 1500);  // delay for enemy attack
    });
 
    $(document).on('emoji:death', function(event, deceased){

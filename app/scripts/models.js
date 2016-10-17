@@ -57,8 +57,9 @@ Emoji.prototype.lowerHealth = function(power) {
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){
-   // TODO: use this.power as an argument to lowerHealth()
-   adversary.lowerHealth(this.power);
+   if(this.health > 0){
+      adversary.lowerHealth(this.power);
+   }
 }
 
 

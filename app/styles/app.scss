@@ -67,14 +67,8 @@ body{
 
   button{
      background-color: transparent;
-
-     &:hover svg{
-      transition: 1s;
-     }
  }
- svg use {
-   width: 40px;
-}
+
 
 
 }
