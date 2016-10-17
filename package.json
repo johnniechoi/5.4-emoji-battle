@@ -23,7 +23,9 @@
     "underscore": "^1.8.3",
     "bootstrap-sass": "^3.3.6",
     "handlebars": "^4.0.5",
-    "hbsfy": "^2.5.1"
+    "hbsfy": "^2.5.1",
+    "animate.css": "^3.5.2",
+    "emojione": "^2.2.6"
   },
   "scripts": {
     "html": "cp app/*.html dist/",
