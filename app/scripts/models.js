@@ -36,21 +36,11 @@ Emoji.prototype.lowerHealth = function(power) {
    console.log('health: ',this.health);
 
 //https://github.com/daneden/animate.css <--- This stuff is super cool!---> .JC
-   // if(hit > 0){
-   //
-   //    this.$healthBar.parent().prev().on('click', function(){
-   //        $(this).addClass('animated shake').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-   //        function(){
-   //        $(this).removeClass('animated shake')
-   //      });
-   //  });
- // };
-
 
       var $animate = this.$healthBar.prev();
       var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-      $animate.addClass('animated shake').one(animationEnd, function(){
-         $animate.removeClass('animated shake');
+      $animate.addClass('animated wobble').one(animationEnd, function(){
+         $animate.removeClass('animated wobble');
       });
 
 
@@ -61,11 +51,9 @@ Emoji.prototype.lowerHealth = function(power) {
       this.$healthBar.text(this.health + '/' + this.startingHealth);
    }
 
-
    if(this.health === 0){
       $(document).trigger('emoji:death', this);
    }
-
 }
 
 Emoji.prototype.attack = function(adversary /* Emoji */){
@@ -73,25 +61,6 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
    adversary.lowerHealth(this.power);
 }
 
-// Good guys
-
-// Emoji.prototype = new Bad();
-// bad{
-//
-// }
-
-// function (config){
-//   attack.call(this, config);
-// }
-// Smiley.prototype = new Good();
-// Smiley.prototype.attack = function(){
-//   return 'lowerHealth';
-//
-// };
-
-//Bad Guys
-
-// place your code here
 
 
 //exports!

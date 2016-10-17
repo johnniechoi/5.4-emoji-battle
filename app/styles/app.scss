@@ -72,8 +72,9 @@ img {
   background-color: #88BCE3;
   transition: all 1s linear;
   margin-right: auto;
+  margin-top: 24px;
   text-shadow: none;
-text-align: right;
+   text-align: right;
 }
 
 
@@ -83,12 +84,30 @@ text-align: right;
   -vendor-animation-iteration-count: infinite;
 }
 
-.select-panel{
+
+
+.overlay{
    position: fixed;
    top: 0;
    left: 0;
    right: 0;
    bottom: 0;
+   display: block;
+   &.hide{
+      display: none;
+   }
+   background-color:white;
+   z-index: 4;
+}
+
+
+.select-panel, .enemy-select{
+
+   height: 100%;
+   transition: height 2s;
+   &.half{height: 50%;}
+
+   width: 100%;
    display: flex;
 
    &.hide{
@@ -99,20 +118,13 @@ text-align: right;
    justify-content: center;
    align-items: center;
    align-content: center;
-   background-color:white;
-   z-index: 4;
+
 
 
    svg{
       width: 80px;
       margin: 24px;
       cursor: pointer;
-      &:hover{
-         -webkit-animation: shake 1s;
-          animation: shake 1s;
-      }
    }
-
-
 
 }

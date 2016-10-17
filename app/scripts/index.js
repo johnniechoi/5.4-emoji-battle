@@ -21,29 +21,50 @@ var good = [ new models.Emoji({power: 8, health: 25, code: ':grinning:'   }),
 
 $(function(){
 
-   var selectedPlayer = good[0];
+   var $select = $('.overlay');
+   $select.append('<div class="select-panel"></div>');
+   var $playerSelect = $('.select-panel');
 
-   $('#app').append("<div class='select-panel'></div>");
-   var $select = $('.select-panel');
+   var selectedPlayer;
+   var selectedEnemy;
 
    // fill selection panel
    _.each(good, function(emo){
       var $image = $(emo.image);
-      $image.click(function(){
-         battle(emo);
-         $select.addClass('hide');
-      });
-      $select.append($image);
-   });
+      $image.click(function(event) {
+
+         $(this).addClass("animated pulse").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+            $(this).removeClass("animated pulse");
+            setTimeout(function(){
+               $select.empty();
+               $select.addClass('hide');
+            },1000);
 
 
+         });
 
-   function battle(player){
-      console.log(player);
-         var selectedPlayer = player;
-         var selectedEnemy  = _.sample(bad);
+         selectedPlayer = emo;
+         selectedEnemy  = _.sample(bad);
 
-         console.log('enemy',selectedEnemy);
+         // $select.append('<div class="enemy-select half"></div>');
+         // var $enemySelect = $('.enemy-select');
+
+         // _.each(bad, function(emo){
+         //    var $image = $(emo.image);
+         //    $enemySelect.append($image);
+         //    if(emo !== selectedEnemy){
+         //       $image.addClass("animated tada").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+         //          $(this).removeClass("animated bounce");
+         //       });
+         //    }
+         //    else {
+         //
+         //       $image.addClass("animated tada").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+         //          $(this).removeClass("animated tada");
+         //       });
+         //    }
+         // });
+
 
          $('.player .image').html(selectedPlayer.image);
          $('.enemy .image').html(selectedEnemy.image);
@@ -51,28 +72,41 @@ $(function(){
          selectedPlayer.setHealthBar($('.player .healthBar'));
          selectedEnemy.setHealthBar($('.enemy .healthBar'));
 
-         $('button').click(function(event){
-            event.preventDefault();
-            $('button').prop('disabled', true);
-            setTimeout(function(){
-               selectedEnemy.attack(selectedPlayer);
-               setTimeout(function(){
-                  $('button').prop('disabled', false);
-               }, 1000); // small extra delay for button
-            }, 1500);  // delay for enemy attack
-            selectedPlayer.attack(selectedEnemy);
-          });
 
-          $(document).on('emoji:death', function(event, deceased){
-             if(deceased === selectedPlayer) {
-               console.log('Player died');
-            }
-            else {
-               console.log('Enemy died');
-            }
-          });
+      });
 
-   }
+      $image.mouseenter(function(event){
+         $(this).addClass("animated bounce");
+      })
+
+      $image.on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
+         $(this).removeClass("animated bounce");
+     });
+
+      $playerSelect.append($image);
+   });
+
+
+   $('button').click(function(event){
+      event.preventDefault();
+      $('button').prop('disabled', true);
+      setTimeout(function(){
+         selectedEnemy.attack(selectedPlayer);
+         setTimeout(function(){
+            $('button').prop('disabled', false);
+         }, 800); // extra delay for button
+      }, 1500);  // delay for enemy attack
+      selectedPlayer.attack(selectedEnemy);
+   });
+
+   $(document).on('emoji:death', function(event, deceased){
+      if(deceased === selectedPlayer) {
+         console.log('Player died');
+      }
+      else {
+         console.log('Enemy died');
+      }
+   });
 
 
 });
