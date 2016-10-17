@@ -82,8 +82,6 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 //Bad Guys
 
 // place your code here
->>>>>>> bear finished the goods in the selector
-
 
 //exports!
 module.exports = {
