@@ -40,7 +40,6 @@ $(function(){
                $select.addClass('hide');
             },1000);
 
-
          });
 
          selectedPlayer = emo;
@@ -68,6 +67,23 @@ $(function(){
 
          $('.player .image').html(selectedPlayer.image);
          $('.enemy .image').html(selectedEnemy.image);
+
+
+   $().appendTo('.app');
+   $('.app').append("<div class='select-panel'></div>");
+   var $select = $('.select-panel');
+
+   // fill selection panel
+   _.each(good, function(emo){
+      $select.append(emo.image);
+   })
+
+   var selectedPlayer = good[0];
+   var selectedEnemy = bad[0];
+  //  var selectedEnemy = _.sample[bad];
+
+  //  $('#app').html("<div class='player'></div><div class='enemy'></div>");
+
 
          selectedPlayer.setHealthBar($('.player .healthBar'));
          selectedEnemy.setHealthBar($('.enemy .healthBar'));

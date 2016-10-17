@@ -63,6 +63,28 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 
 
 
+// Good guys
+
+// Emoji.prototype = new Bad();
+// bad{
+//
+// }
+
+// function (config){
+//   attack.call(this, config);
+// }
+// Smiley.prototype = new Good();
+// Smiley.prototype.attack = function(){
+//   return 'lowerHealth';
+//
+// };
+
+//Bad Guys
+
+// place your code here
+>>>>>>> bear finished the goods in the selector
+
+
 //exports!
 module.exports = {
   'Emoji':     Emoji,
