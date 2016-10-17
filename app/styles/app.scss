@@ -18,6 +18,9 @@ img {
   max-width: 100%;
 }
 
+body{
+   margin-bottom: 32px;
+}
 
 .player, .enemy
    {
@@ -36,21 +39,35 @@ img {
       margin-right: 0 !important;
       margin-left: auto;
       text-align: left;
+      overflow:hidden;
+
    }
 }
 
 .button-styles{
 
   display: flex;
-
   position: relative;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  background-color: none;
+  //min-height: 100px;
 
-  margin-top: 20px;
+  margin-top: 200px;
   padding-left: 20px;
+  height:100%;
+
+  button{
+     background-color: transparent;
+
+     &:hover svg{
+      transition: 1s;
+     }
+ }
+ svg use {
+   width: 50px;
+}
 
 
 }
@@ -78,11 +95,11 @@ img {
 }
 
 
-.shake {
-  -vendor-animation-duration: 6s;
-  -vendor-animation-delay: 2s;
-  -vendor-animation-iteration-count: infinite;
-}
+// .shake {
+//   -vendor-animation-duration: 6s;
+//   -vendor-animation-delay: 2s;
+//   -vendor-animation-iteration-count: infinite;
+// }
 
 
 
@@ -123,8 +140,25 @@ img {
 
    svg{
       width: 80px;
-      margin: 24px;
+      margin: 4px 24px;
       cursor: pointer;
+
+      &:hover{
+         border-bottom: 2px solid #bbb;
+      }
    }
 
+}
+
+audio {
+   position:fixed;
+   bottom:0;
+    width: 100%;
+    opacity: .5;
+    z-index: 8;
+    transition: opacity .3s;
+
+    &:hover{
+      opacity: 1;
+   }
 }
