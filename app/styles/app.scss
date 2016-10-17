@@ -67,6 +67,10 @@ body{
 
   button{
      background-color: transparent;
+     border: none;
+      outline-offset: 0px !important;
+     outline: 0 !important;
+     box-shadow: none !important;
  }
 
 

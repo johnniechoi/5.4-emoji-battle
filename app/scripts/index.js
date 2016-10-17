@@ -87,7 +87,6 @@ $(function(){
       $attackButton.prop('disabled', true);
       $(this).addClass('animated swing').on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
          $(this).removeClass("animated swing");
-
       });
 
 
