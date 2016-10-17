@@ -6,7 +6,7 @@ var emojione = require('emojione')
 
 emojione.imageType = 'svg';
 emojione.sprites = true;
-emojione.imagePathSVGSprites = '../../node_modules/emojione/assets/sprites/emojione.sprites.svg';
+emojione.imagePathSVGSprites = './fonts/emojione.sprites.svg';
 
 function Emoji(config) {
    config = config || {};
