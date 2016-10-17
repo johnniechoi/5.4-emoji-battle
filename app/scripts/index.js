@@ -3,22 +3,22 @@ var _ = require('underscore');
 var emojione = require('emojione')
 var models = require('./models');
 
+var good = [
+  new models.Emoji({power: 8, health: 25, code: ':grinning:'   }),
+  new models.Emoji({power: 8, health: 25, code: ':older_woman:'}),
+  new models.Emoji({power: 8, health: 25, code: ':santa:'      }),
+  new models.Emoji({power: 8, health: 25, code: ':unicorn:'    }),
+  new models.Emoji({power: 8, health: 25, code: ':dragon:'     })
+ ];
+
+ var bad = [
+  new models.Emoji({power: 8, health: 18, code: ':poop:' }),
+  new models.Emoji({power: 8, health: 18, code: ':robot:'}),
+  new models.Emoji({power: 8, health: 18, code: ':alien:'}),
+  new models.Emoji({power: 8, health: 18, code: ':imp:'   })
+ ];
+
 // wait for DOM to be ready
-
-
-var good = [ new models.Emoji({power: 8, health: 25, code: ':grinning:'   }),
-             new models.Emoji({power: 8, health: 25, code: ':older_woman:'}),
-             new models.Emoji({power: 8, health: 25, code: ':santa:'      }),
-             new models.Emoji({power: 8, health: 25, code: ':unicorn:'    }),
-             new models.Emoji({power: 8, health: 25, code: ':dragon:'     })
-           ];
-
- var bad = [ new models.Emoji({power: 8, health: 25, code: ':poop:' }),
-             new models.Emoji({power: 8, health: 25, code: ':robot:'}),
-             new models.Emoji({power: 8, health: 25, code: ':alien:'}),
-             new models.Emoji({power: 8, health: 25, code: ':imp:'   })
-           ];
-
 $(function(){
 
    var $select = $('.overlay');
@@ -31,6 +31,7 @@ $(function(){
    // fill selection panel
    _.each(good, function(emo){
       var $image = $(emo.image);
+
       $image.click(function(event) {
 
          $(this).addClass("animated pulse").on("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function(event) {
@@ -123,6 +124,9 @@ $(function(){
          console.log('Enemy died');
       }
    });
+
+   }
+
 
 
 });

@@ -35,8 +35,11 @@ Emoji.prototype.lowerHealth = function(power) {
    this.health -= hit;
    console.log('health: ',this.health);
 
+<<<<<<< HEAD
 //https://github.com/daneden/animate.css <--- This stuff is super cool!---> .JC
 
+=======
+>>>>>>> last commit
       var $animate = this.$healthBar.prev();
       var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
       $animate.addClass('animated wobble').one(animationEnd, function(){
@@ -62,22 +65,7 @@ Emoji.prototype.attack = function(adversary /* Emoji */){
 }
 
 
-
 // Good guys
-
-// Emoji.prototype = new Bad();
-// bad{
-//
-// }
-
-// function (config){
-//   attack.call(this, config);
-// }
-// Smiley.prototype = new Good();
-// Smiley.prototype.attack = function(){
-//   return 'lowerHealth';
-//
-// };
 
 //Bad Guys
 
