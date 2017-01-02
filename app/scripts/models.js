@@ -1,6 +1,5 @@
 var $ = require('jQuery');
 var _ = require('underscore');
-var _ = require('underscore');
 var emojione = require('emojione')
 
 
